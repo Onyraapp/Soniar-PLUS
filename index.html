@@ -1912,13 +1912,24 @@ function renderClipPicker() {
   grid.innerHTML = allUserVideos.map((v, i) => {
     const sel = selectedIds.includes(v.id);
     const bg = gradients[i % gradients.length];
-    return `<div class="cp-item${sel ? ' selected' : ''}" onclick="toggleClipSelection('${v.id}')" data-id="${v.id}" role="checkbox" aria-checked="${sel}" aria-label="${(v.title||v.prompt||'Clip').substring(0,40)}" tabindex="0" style="background:${bg};">
+    const label = (v.title||v.prompt||'Clip').substring(0,40).replace(/"/g,'');
+    return `<div class="cp-item${sel ? ' selected' : ''}" data-vid-id="${i}" role="checkbox" aria-checked="${sel}" aria-label="${label}" tabindex="0" style="background:${bg};cursor:pointer;">
       ${v.thumbnail_url ? `<img src="${v.thumbnail_url}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" loading="lazy" alt=""/>` : ''}
       <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.6) 0%,transparent 60%);"></div>
       <div style="position:absolute;bottom:4px;left:5px;right:5px;font-size:0.55rem;color:#fff;font-weight:600;line-height:1.2;">${(v.title||v.prompt||'').substring(0,25)}</div>
       <div class="cp-item-check">✓</div>
     </div>`;
   }).join('');
+
+  // Bind clicks via JS to avoid inline onclick issues
+  grid.querySelectorAll('.cp-item').forEach((el, i) => {
+    el.addEventListener('click', () => {
+      const video = allUserVideos[i];
+      if (!video) return;
+      console.log('cp-item clicked:', video.id);
+      toggleClipSelection(video.id);
+    });
+  });
 }
 
 function toggleClipSelection(videoId) {
