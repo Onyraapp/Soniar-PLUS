@@ -452,7 +452,7 @@ input, textarea { font-family: var(--font); outline: none; border: none; backgro
 .tl-empty-icon { font-size: 2rem; margin-bottom: 12px; opacity: 0.3; }
 
 /* Clip picker modal */
-.clip-picker { position: absolute; inset: 0; background: rgba(10,5,30,0.97); z-index: 200; display: none; flex-direction: column; border-radius: inherit; }
+.clip-picker { position: fixed; inset: 0; background: rgba(10,5,30,0.98); z-index: 9999; display: none; flex-direction: column; max-width: 430px; margin: 0 auto; }
 .clip-picker.open { display: flex; }
 .cp-header { display: flex; align-items: center; justify-content: space-between; padding: 16px; border-bottom: 0.5px solid rgba(255,255,255,0.08); }
 .cp-title { color: #fff; font-size: 0.9rem; font-weight: 700; font-family: var(--font-display); }
