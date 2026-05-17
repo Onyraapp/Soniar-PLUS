@@ -1015,7 +1015,12 @@ async function initAuth() {
     if (event === 'SIGNED_IN' && session) {
       currentUser = session.user;
       updateProfileUI(currentUser);
-      goTo('s-home');
+      // Only redirect to home on initial sign in, not on token refresh
+      const activeScreen = document.querySelector('.screen.active');
+      const activeId = activeScreen ? activeScreen.id : '';
+      if (!activeId || activeId === 's-login') {
+        goTo('s-home');
+      }
       loadVideos();
     } else if (event === 'SIGNED_OUT') {
       currentUser = null;
