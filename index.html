@@ -554,7 +554,7 @@ input, textarea { font-family: var(--font); outline: none; border: none; backgro
         <span class="tl-dur-val" id="tl-dur-val">0s / 45s</span>
       </div>
       <div id="tl-clips-container"></div>
-      <button class="tl-add-btn" onclick="openClipPicker()" id="tl-add-btn">
+      <button class="tl-add-btn" onclick="openClipPicker()" id="tl-add-btn" style="display:none;">
         <span style="font-size:1.1rem;color:rgba(255,255,255,0.25);">+</span>
         <span>Add clip from Recent Creations</span>
       </button>
@@ -1805,6 +1805,9 @@ function renderTimeline() {
 
   // Update duration bar
   updateDurationBar();
+
+  // Show add btn only when there are clips (empty state has its own button)
+  addBtn.style.display = tlClips.length === 0 ? 'none' : 'flex';
 
   // Disable add button if max clips or max duration reached
   const totalDur = tlClips.reduce((s, c) => s + (parseFloat(c.duration) || 5), 0);
