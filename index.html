@@ -1711,12 +1711,12 @@ async function loadTimeline() {
       .eq('type', 'timeline')
       .eq('status', 'draft')
       .order('created_at', { ascending: false })
-      .limit(1)
-      .single();
-    if (data && data.clips && data.clips.length > 0) {
-      currentTimelineId = data.id;
-      tlClips = data.clips;
-      allUserVideos = []; // reset so picker reloads
+      .limit(1);
+    const row = data && data.length > 0 ? data[0] : null;
+    if (row && row.clips && row.clips.length > 0) {
+      currentTimelineId = row.id;
+      tlClips = row.clips;
+      allUserVideos = [];
       loadClipPickerVideos();
     }
   } catch(e) {}
