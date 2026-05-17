@@ -563,14 +563,6 @@ input, textarea { font-family: var(--font); outline: none; border: none; backgro
       <button class="tl-btn-preview" onclick="previewTimeline()" aria-label="Preview timeline">▶ Preview</button>
       <button class="tl-btn-export" onclick="exportTimeline()" aria-label="Export timeline as video">⬇ Export video</button>
     </div>
-    <!-- Clip Picker -->
-    <div class="clip-picker" id="clip-picker">
-      <div class="cp-header">
-        <span class="cp-title">Choose a clip</span>
-        <button class="cp-close" onclick="closeClipPicker()">✕</button>
-      </div>
-      <div class="cp-grid" id="cp-grid"></div>
-    </div>
     <!-- Preview modal -->
     <div id="tl-preview-modal" style="display:none;position:absolute;inset:0;background:rgba(0,0,0,0.95);z-index:300;flex-direction:column;align-items:center;justify-content:center;">
       <video id="tl-preview-video" style="width:100%;max-height:70vh;object-fit:contain;" controls playsinline></video>
@@ -990,6 +982,14 @@ input, textarea { font-family: var(--font); outline: none; border: none; backgro
     </nav>
   </div>
 
+  <!-- Clip Picker — outside screens to avoid stacking context issues -->
+  <div class="clip-picker" id="clip-picker">
+    <div class="cp-header">
+      <span class="cp-title">Choose a clip</span>
+      <button class="cp-close" onclick="closeClipPicker()">✕</button>
+    </div>
+    <div class="cp-grid" id="cp-grid"></div>
+  </div>
   <div class="toast" id="toast"></div>
 </div>
 
